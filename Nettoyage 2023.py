@@ -59,4 +59,5 @@ display(balanced_df)
 
 # COMMAND ----------
 
+# test
 balanced_df.write.mode("overwrite").saveAsTable("cleaned_train")
