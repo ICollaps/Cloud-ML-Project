@@ -1,5 +1,5 @@
 # Databricks notebook source
-df = spark.table("train")
+df = spark.table("train_casted")
 raw_len = df.count()
 print(raw_len)
 
@@ -7,8 +7,14 @@ display(df)
 
 # COMMAND ----------
 
+display(df)
+
+# COMMAND ----------
+
 cleaned_df = df.drop(
     "_c0",
+    "c0",
+    "NDPE",
     "N_DPE",
     "Facteur_couverture_solaire",
     "Surface_habitable_desservie_par_installation_ECS",
@@ -59,5 +65,9 @@ display(balanced_df)
 
 # COMMAND ----------
 
+display(balanced_df)
+
+# COMMAND ----------
+
 # test
-balanced_df.write.mode("overwrite").saveAsTable("cleaned_train")
+balanced_df.write.mode("overwrite").saveAsTable("cleaned_train_casted")
