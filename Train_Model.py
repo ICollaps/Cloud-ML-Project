@@ -53,3 +53,33 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f'Accuracy: {accuracy}')
+
+# COMMAND ----------
+
+import mlflow
+from mlflow.models.signature import infer_signature
+
+train = X_train
+predictions = model.predict(X_test)
+signature = infer_signature(train, predictions)
+input_example = X_train.head(3)
+conda_env = {
+    'channels': ['conda-forge'],
+    'dependencies': [
+        'python=3.8.10',
+        {
+    'pip': [
+        'mlflow==1.30.0',
+        'cloudpickle==1.6.0',
+        'databricks-automl-runtime==0.2.6.4',
+        'holidays==0.12',
+        'koalas==1.8.2',
+        'psutil==5.8.0',
+        'scikit-learn==0.24.1',
+        'typing-extensions==3.7.4.3'
+    ]
+        }],
+    'name': 'mlflow-env'
+}
+mlflow.sklearn.log_model(model, "to_api",conda_env=conda_env,signature=signature, input_example=input_example)
+
