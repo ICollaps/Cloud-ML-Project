@@ -65,6 +65,7 @@ schema = StructType([
 # COMMAND ----------
 
 df = spark.read.csv('/mnt/groupe10mount/train.csv', header=True, schema=schema)
+df_val = spark.read.csv('/mnt/groupe10mount/val.csv', header=True, schema=schema)
 
 # COMMAND ----------
 
@@ -82,6 +83,7 @@ def clean_column_name(column_name):
     return re.sub(r'[ ,;{}()\n\t=]', '_', column_name)
 
 df_cleaned = df.toDF(*(clean_column_name(c) for c in df.columns))
+df_val_cleaned = df_val.toDF(*(clean_column_name(c) for c in df_val.columns))
 
 # COMMAND ----------
 
@@ -91,3 +93,4 @@ df_cleaned = df.toDF(*(clean_column_name(c) for c in df.columns))
 # COMMAND ----------
 
 df_cleaned.write.mode("overwrite").saveAsTable("raw_data")
+df_val_cleaned.write.mode("overwrite").saveAsTable("raw_val_data")
