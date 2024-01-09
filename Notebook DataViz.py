@@ -8,8 +8,14 @@ from pyspark.sql import functions as F
 
 # COMMAND ----------
 
-df = spark.table("train_casted")
-df_cleaned = spark.table("cleaned_train_casted")
+# df = spark.table("train_casted")
+df = spark.table("raw_data")
+# df_cleaned = spark.table("cleaned_train_casted")
+df_cleaned = spark.table("cleaned_data")
+
+# COMMAND ----------
+
+display(df_cleaned)
 
 # COMMAND ----------
 
@@ -24,3 +30,30 @@ dpe_cleaned_grouped = df_cleaned.groupBy("Etiquette_DPE").count().withColumnRena
 count_dpe = dpe_grouped.join(dpe_cleaned_grouped, on="Etiquette_DPE", how="full_outer")
 
 display(count_dpe)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Distribution des années de construction
+
+# COMMAND ----------
+
+display(df_cleaned)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Word Cloud qualité d'isolation
+
+# COMMAND ----------
+
+display(df_cleaned)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # Analyse par DPE
+
+# COMMAND ----------
+
+display(df_cleaned)
