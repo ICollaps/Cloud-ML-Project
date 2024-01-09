@@ -4,7 +4,7 @@
 
 # COMMAND ----------
 
-dbutils.fs.mount(source="wasbs://groupe10@groupe10.blob.core.windows.net",mount_point="/mnt/groupe10mount",extra_configs={"fs.azure.account.key.groupe10.blob.core.windows.net":dbutils.secrets.get(scope="groupe10scope",key="secretgroupe10")})
+# dbutils.fs.mount(source="wasbs://groupe10@groupe10.blob.core.windows.net",mount_point="/mnt/groupe10mount",extra_configs={"fs.azure.account.key.groupe10.blob.core.windows.net":dbutils.secrets.get(scope="groupe10scope",key="secretgroupe10")})
 
 # COMMAND ----------
 
